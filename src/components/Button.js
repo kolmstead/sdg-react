@@ -1,7 +1,7 @@
 import React from 'react';
 
-var buttonStyle = {
-  backgroundColor: 'red',
+const buttonStyle = {
+  backgroundColor: '#73e600',
   padding: '15px'
 };
 

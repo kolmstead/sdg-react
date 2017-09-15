@@ -6,6 +6,7 @@ import { PairMatch } from './components/Pair';
 import Button from './components/Button';
 import focusAreas from './components/unObject';
 import { clickHandler } from './components/stuff';
+import { testMe } from './components/pairSupport';
 
 class App extends React.Component {
   
@@ -28,6 +29,7 @@ const { nameList, focusAreas } = this.state;
         <PairMatch/>
         <Button handleClick={()=>clickHandler('aList', focusAreas)} label="Anything in Here?"/>
         <Button handleClick={()=>clickHandler('Knowlton', focusAreas)} label="Another Button!"/>
+        <Button handleClick={()=>testMe()} label="get a pair" />
       </div>)
     );
   }
