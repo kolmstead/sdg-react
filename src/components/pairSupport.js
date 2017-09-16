@@ -49,6 +49,7 @@ function renderNewPair([props, considerLater, unPick]) {
   console.log("Props:", props);
   console.log("considerLater", considerLater);
   console.log("unPick is", unPick);
+
   
 }
 

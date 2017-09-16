@@ -1,7 +1,8 @@
 import React from 'react';
 
 const buttonStyle = {
-  backgroundColor: '#73e600',
+  backgroundColor: '#7693c1',
+  width: '150px',
   padding: '15px'
 };
 
