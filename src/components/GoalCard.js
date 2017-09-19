@@ -9,12 +9,12 @@ class GoalCard extends React.Component {
 
   
   render() {
-    const { imgSource, imgAlt } = this.props;
+    const { imgSource, imgAlt, clId } = this.props;
     
     return (
        <div>
          <img src={imgSource} alt={imgAlt} onClick={this.props.handleChange} />
-         <HighlightOff onClick={this.props.handleClick} />
+         <HighlightOff onClick={this.props.handleClick} id={clId} />
          
        </div>
     );
