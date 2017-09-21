@@ -3,19 +3,23 @@ import HighlightOff from 'material-ui-icons/HighlightOff';
 
 class GoalCard extends React.Component {
   
-  // constructor(props){
-  //   super(props);
-  // } 
+  constructor(props){
+    super(props);
+    this.something = this.something.bind(this);
+  } 
+  
+  something (e) {
+    console.log("Add", e, "to considerLater list.");
+  }
 
   
   render() {
-    const { imgSource, imgAlt, clId } = this.props;
+    const { imgSource, imgAlt, value } = this.props;
     
     return (
-       <div>
+       <div key>
          <img src={imgSource} alt={imgAlt} onClick={this.props.handleChange} />
-         <HighlightOff onClick={this.props.handleClick} id={clId} />
-         
+         <HighlightOff onClick={()=>this.something(value)} value={value} />
        </div>
     );
   }

@@ -31,7 +31,7 @@ export function getTheObj(id) {
     .then((myObj)=>{
     console.log("myObj?", myObj);
     return myObj;}
-    )
+    );
 }
 
 export function saveStuff(id, doc) {
