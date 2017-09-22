@@ -7,6 +7,7 @@ import { testMe } from './components/pairSupport';
 import GoalCard from './components/GoalCard';
 import imgBlob from './components/imageExports';
 import focusAreas from './components/unObject';
+import ParentInfo from './components/ParentInfo';
 
 
 class App extends React.Component {
@@ -80,6 +81,7 @@ const img2 = focusAreas[unPick[1]];
                   value={img2.slug} />
 
         <Button handleClick={this.changeUnPick} label="Get Two">{this.changeUnPick} </Button>
+        <ParentInfo/>
 
 
       </div>)

@@ -18,17 +18,17 @@ function getNewPair([props,considerLater]) {
     let propsList = Object.keys(props);
     let i=0;
   for (i=0; i<2; i++) {
-    pickRandom2([props,considerLater,propsList, unPick]);
+    pickRandom([props,considerLater,propsList, unPick]);
   }
   saveStuff('unPick', unPick)
   return ([props, considerLater, unPick])
 }
 
 // runs inside getNewPair()
-function pickRandom2([props,considerLater,propsList, unPick]) {
+function pickRandom([props,considerLater,propsList, unPick]) {
   let pick = props[propsList[getRandom(0, propsList.length - 1)]].slug;
   if ( considerLater.includes(pick) || unPick.includes(pick)) {
-    pickRandom2([props,considerLater,propsList, unPick]);
+    pickRandom([props,considerLater,propsList, unPick]);
   } else {
     unPick.push(pick);
     saveStuff('unPick', unPick);
@@ -46,8 +46,6 @@ function renderNewPair([props, considerLater, unPick]) {
   
   // document.getElementById('p1x').addEventListener('click', pickConsiderLater);
   // document.getElementById('p2x').addEventListener('click', pickConsiderLater);
-  console.log("Props:", props);
-  console.log("considerLater", considerLater);
   console.log("unPick is", unPick);
 
   
