@@ -20,9 +20,9 @@ class ParentInfo extends React.Component {
         <div>
             {un2.map(function(name, index){
                 return (
-                  <GoalInfoCard key={ index }>
+                  <GoalInfoCard key={ index } className="goalInfoCard">
                     <img src={imgBlob[name]} alt={name} className="imgInfo"/>
-                    {name}{focusAreas[name].label}
+                    <h3>{focusAreas[name].label}</h3><div dangerouslySetInnerHTML={{__html: focusAreas[name].info}}></div>
                   </GoalInfoCard>
             )})
             }

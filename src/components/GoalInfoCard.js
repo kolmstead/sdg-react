@@ -5,7 +5,7 @@ class GoalInfoCard extends React.Component {
   render() {
     
     return (
-    <div>
+    <div className="bobCard">
       {this.props.children}
     </div>
     );
