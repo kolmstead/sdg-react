@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import sdg07 from '../UNimages/un17banner.png';
 
-// const imgSrc = "sdg07.png";
-
 class Hello extends Component {
   render() {
     return (

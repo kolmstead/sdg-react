@@ -13,9 +13,15 @@ class GoalCard extends React.Component {
   handleConsiderLater (e) {
     const pickConsiderLater = e;
     let considerLaterList = this.props.laterList;
+    console.log("check my considerLater when picking a cl", considerLaterList);
+    if (considerLaterList.length > 9) {
+      window.alert("You've reached your max.");
+      return;
+    } else {
     considerLaterList.push(pickConsiderLater);
     saveStuff('considerLater', considerLaterList);
     this.props.replaceConsiderLater(e);
+    }
   }
 
   

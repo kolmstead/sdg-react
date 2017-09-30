@@ -8,7 +8,6 @@ class ParentInfo extends React.Component {
     super(props);
     
     this.state = {
-      unList: ["bob", "freddy", "zoey"],
       un2: Object.keys(focusAreas),
       focusAreas: focusAreas
     };
