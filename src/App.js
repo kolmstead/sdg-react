@@ -17,6 +17,7 @@ class App extends React.Component {
     this.changeUnPick3 = this.changeUnPick3.bind(this);
     this.getStuffFromLocalStorageToState = this.getStuffFromLocalStorageToState.bind(this);
     this.checkSetUp = this.checkSetUp.bind(this);
+    // this.scoreUnPick = this.scoreUnPick.bind(this);
       
     this.state = {
       localSetUp: ['considerLater', 'unPick', 'newPair'],
@@ -49,6 +50,16 @@ changeUnPick3(unList, unPick, considerLater, newPair) {
   console.log("CL now after pair is picked", this.state.considerLater);
 
 } 
+
+//move this to App, might have to be called inside handleChange=changeUnPick3
+// scoreUnPick(e, unList, unPick, considerLater, newPair) {
+//   const pickWinner = e;
+//   console.log("a new Score for", pickWinner);
+//   this.changeUnPick3(unList, unPick, considerLater, newPair);
+// }
+
+
+
 
 replaceConsiderLater2(x) {
   
@@ -146,10 +157,13 @@ const img2 = focusAreas[unPick[1]];
       <div className="App">
 
         <GoalCard imgSource={imgBlob[img1.slug]} imgAlt={img1.label} handleChange={()=>this.changeUnPick3(this.state.unList, this.state.unPick, this.state.considerLater)} 
+                  scores={focusAreas}
+                  jarJar={img1.slug}
                   key={img1.slug} 
                   value={img1.slug} laterList={considerLater} replaceConsiderLater={this.replaceConsiderLater2} />
 
-        <GoalCard imgSource={imgBlob[img2.slug]} imgAlt={img2.label} handleChange={()=>this.changeUnPick3(this.state.unList, this.state.unPick, this.state.considerLater)} 
+        <GoalCard imgSource={imgBlob[img2.slug]} imgAlt={img2.label} handleChange={()=>this.changeUnPick3(this.state.unList, this.state.unPick, this.state.considerLater)}
+                  jarJar={img2.slug}
                   key={img2.slug} 
                   value={img2.slug} laterList={considerLater} replaceConsiderLater={this.replaceConsiderLater2} />
 
@@ -165,3 +179,13 @@ const img2 = focusAreas[unPick[1]];
 }
 
 export default App;
+
+//TODO:
+//reset considerLater
+//wrap Pair to try to get async working (load state before rendering)
+//clean up css
+//add a welcome screen (get their name maybe)
+//add scoring
+//show considerLater
+//show topFive
+//get Alert to be in App, not a pop-up
