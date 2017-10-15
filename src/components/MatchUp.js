@@ -1,26 +1,12 @@
+import React from 'react';
+import Button from './Button';
 
+const MatchUp = (props) => (
+  
+  <div><h1>{props.fred}</h1>
+    <p><img src={props.img1} alt={props.unPick1} style={{width: "50px"}} onClick={props.handleChange} /> unPick: {props.unPick1} Score: {props.score1}<Button label="Pick1" handleClick={()=>console.log(props.unPick1)} /></p>
+    <p><img src={props.img2} alt={props.unPick2} style={{width: "50px"}}/> unPick: {props.unPick2} Score: {props.score2}<Button label="Pick2" handleClick={()=>console.log(props.unPick2)} /></p>
+  </div>
+);
 
-
-
-
-
-
-// <MatchUp>
-
-//   <GoalCard
-//     image={goal1.image}
-//     title={goal1.title}
-//     description={goal1.description}
-//     onSelect={() => chooseWinner(goal1, goal2)}
-//     onRemove={() => newMatchUp(goal1) }
-//   />
-
-//   <GoalCard
-//     image={goal2.image}
-//     title={goal2.title}
-//     description={goal2.description}
-//     onSelect={() => chooseWinner(goal2, goal1)}
-//     onRemove={() => newMatchUp(goal2) }
-//   />
-
-// </MatchUp>
+export default MatchUp;

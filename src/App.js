@@ -6,8 +6,7 @@ import { getNewPick, getNewPick2 } from './components/pairSupport';
 import GoalCard from './components/GoalCard';
 import imgBlob from './components/imageExports';
 import focusAreas from './components/unObject';
-import ParentInfo from './components/ParentInfo';
-
+import MatchUpContainer from './components/MatchUpContainer';
 
 class App extends React.Component {
   
@@ -20,7 +19,7 @@ class App extends React.Component {
     // this.scoreUnPick = this.scoreUnPick.bind(this);
       
     this.state = {
-      localSetUp: ['considerLater', 'unPick', 'newPair'],
+      localSetUp: ['considerLater', 'unPick', 'newPair', 'unScores'],
       unPick: [],
       img1: '',
       img2: '',
@@ -33,21 +32,18 @@ class App extends React.Component {
   
 
 changeUnPick3(unList, unPick, considerLater, newPair) {
-  // unList = this.state.unList;
   unPick = this.state.unPick;
-  // considerLater = this.state.considerLater;
   newPair = [];
-  // console.log("starting UnPick3", unList, unPick, considerLater, newPair);  
-  // console.log("in state at changeUnPick3 considerLater is", this.state.considerLater);
+
   let i = 0;
   for ( i=0; i<2; i++) {
     getNewPick2(unList, unPick, considerLater, newPair);
   } console.log("newPair is now", newPair);
-  console.log("State:", this.state);
+
   this.setState({unPick: newPair});
   saveStuff('newPair', newPair);
   saveStuff('unPick', newPair);
-  console.log("CL now after pair is picked", this.state.considerLater);
+  getStuff('focusAreasJSON').then(focusAreas => this.setState({focusAreas: focusAreas}));
 
 } 
 
@@ -143,6 +139,7 @@ componentDidMount() {
   console.log("state of cllist at didMount", this.state.considerLater);
   getStuff("nameList").then(nameList => this.setState({ nameList }));
   getStuff('unPick').then(unPick => this.setState({ unPick }));
+  // getStuff('focusAreasJSON').then(focusAreas => this.setState({ focusAreas }));
   console.log("after mounting!...", this.state.unPick, this.state.considerLater);
   // this.changeUnPick3(this.state.unList, this.state.unPick, this.state.considerLater);
 }
@@ -158,11 +155,14 @@ const img2 = focusAreas[unPick[1]];
 
         <GoalCard imgSource={imgBlob[img1.slug]} imgAlt={img1.label} handleChange={()=>this.changeUnPick3(this.state.unList, this.state.unPick, this.state.considerLater)} 
                   scores={focusAreas}
+                  myPair={img2.slug}
                   jarJar={img1.slug}
                   key={img1.slug} 
                   value={img1.slug} laterList={considerLater} replaceConsiderLater={this.replaceConsiderLater2} />
 
         <GoalCard imgSource={imgBlob[img2.slug]} imgAlt={img2.label} handleChange={()=>this.changeUnPick3(this.state.unList, this.state.unPick, this.state.considerLater)}
+                  scores={focusAreas}
+                  myPair={img1.slug}
                   jarJar={img2.slug}
                   key={img2.slug} 
                   value={img2.slug} laterList={considerLater} replaceConsiderLater={this.replaceConsiderLater2} />
@@ -170,8 +170,8 @@ const img2 = focusAreas[unPick[1]];
         <Button handleClick={()=>this.changeUnPick3(unList, unPick, considerLater)} label="Get Two"/>
         <Button handleClick={()=>console.log(this.state.unPick)} label="Get UnPick State Now"/>
         <Button handleClick={()=>console.log("clList in state is", considerLater)} label="Get considerLater from state"/>
-
-        <ParentInfo/>
+        <Button handleClick={()=>console.log("scores anyone?", this.state.focusAreas[unPick[0]].slug, this.state.focusAreas[unPick[0]].score)} label="Get Scores" />
+        <MatchUpContainer unPickProp={unPick} />
 
       </div>)
     );

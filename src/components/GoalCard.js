@@ -1,6 +1,7 @@
 import React from 'react';
 import HighlightOff from 'material-ui-icons/HighlightOff';
 import { saveStuff } from './stuff';
+import scoreMore from './unScores'; //this is for MatchUpContainer testing
 
 class GoalCard extends React.Component {
   
@@ -21,6 +22,16 @@ class GoalCard extends React.Component {
     console.log("new score is", newScore);
     console.log("tada newscore is", scores[pick].score);
     saveStuff('focusAreasJSON', scores);
+    let myPair = this.props.myPair;
+    console.log("My Pair is", myPair);
+    // write an if statement if pick or myPair not 0 then leapfrog score else add 1
+    // let scoreMost = scoreMore[pick] + scoreMore[myPair];
+    let scoreMost = scoreMore[pick] + 1; // also get rid of reset; get scores from local
+    scoreMore[pick]=scoreMost;
+    console.log("scoreMost is", scoreMost);
+    console.log("is it?", scoreMore);
+    console.log("score pick is", pick, scoreMore[pick]);
+    saveStuff('unScores', scoreMore);
   }
   
   handleConsiderLater (e) {
