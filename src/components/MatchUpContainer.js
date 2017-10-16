@@ -1,7 +1,7 @@
 import React from 'react';
 import focusAreas from './unObject';
 import MatchUp from './MatchUp';
-import { joesThing, getStuff, saveStuff, getNewPickInMatch } from './stuff';
+import { getStuff, saveStuff, getNewPickInMatch } from './stuff';
 import imgBlob from './imageExports';
 // import Button from './Button';
 
@@ -11,6 +11,7 @@ class MatchUpContainer extends React.Component {
     super();
     this.tryMe = this.tryMe.bind(this);
     this.changeMatch = this.changeMatch.bind(this);
+    this.scoreWinner = this.scoreWinner.bind(this);
     
     this.state = {
       considerLater: JSON.parse(localStorage.getItem('considerLater')),
@@ -21,6 +22,24 @@ class MatchUpContainer extends React.Component {
       unPick: JSON.parse(localStorage.getItem('unPick')),
       fred: "hey fred!",
     };
+  }
+  
+  bobPick(e, unList, unPick, considerLater, newPair, scores){
+    this.scoreWinner(e, unList, unPick, considerLater, newPair, scores);
+    this.changeMatch(unList, unPick, considerLater, newPair);
+  }
+  
+  scoreWinner(e, unList, unPick, considerLater, newPair, scores){
+    const winner = e.target.alt;
+    const loser = winner !== unPick[0] ? unPick[0] : unPick[1];
+    const loserScore = scores[loser];
+    const winnerScore = loserScore === 0 ? scores[winner] + 1 : scores[winner] + loserScore;
+    console.log("Winner score now", winnerScore);
+    const newScores = scores;
+    newScores[winner] = winnerScore;
+    this.setState({scores: newScores});
+    console.log("going up?", newScores);
+    saveStuff('unScores', newScores);
   }
   
   changeMatch(unList, unPick, considerLater, newPair) {
@@ -38,20 +57,18 @@ class MatchUpContainer extends React.Component {
     getStuff('focusAreasJSON').then(focusAreas => this.setState({focusAreas: focusAreas}));
   }
   
- tryMe(){
+ tryMe(unList, unPick, considerLater, newPair){
    console.log("tryMe", this.state.scores);
-   joesThing();
    return;
  } 
 
 
   render() {
-  const { scores, unList, unPick, considerLater } = this.state;
-  // const { unPickProp } = this.props; //**no longer sending this from MiniApp replacing unPickProp code with unPick
+  const { unList, unPick, considerLater, newPair, scores } = this.state;
   
     return (
       <div>
-        <MatchUp unPick1={unPick[0]} unPick2={unPick[1]} score1={scores[unPick[0]]} score2={scores[unPick[1]]} handleChange={()=>this.changeMatch(unList, unPick, considerLater)} img1={imgBlob[unPick[0]]} img2={imgBlob[unPick[1]]} {...this.state}
+        <MatchUp unPick1={unPick[0]} unPick2={unPick[1]} score1={scores[unPick[0]]} score2={scores[unPick[1]]} handleChange={(e)=>this.bobPick(e, unList, unPick, considerLater, newPair, scores)} img1={imgBlob[unPick[0]]} img2={imgBlob[unPick[1]]} {...this.state}
         
         />
       </div>
@@ -60,6 +77,8 @@ class MatchUpContainer extends React.Component {
 }
 
 export default MatchUpContainer;
+//(e)=>this.bobPick(e, unList, unPick, considerLater, newPair, scores)
+
 
 //old code when getting 
         // <MatchUp unPick1={unPickProp[0]} unPick2={unPickProp[1]} score1={scores[unPickProp[0]]} score2={scores[unPickProp[1]]} handleChange={()=>this.changeMatch(unList, unPick, considerLater)} thePick={this.props.unPickProp} img1={imgBlob[unPickProp[0]]} img2={imgBlob[unPickProp[1]]} {...this.state}

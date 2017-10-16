@@ -58,9 +58,7 @@ export function getNewPickInMatch(unList, unPick, considerLater, newPair) {
     } else {
       newPair.push(pick);
       saveStuff('newPair', newPair);
-      // console.log("newPair is", newPair);
       saveStuff('unPick', newPair);
-      console.log("are newPair and unPick saved? --inside getNewPick...", newPair, unPick)
       return ([newPair, unPick]);
     }
   } 
@@ -71,5 +69,20 @@ export function getRandom(min, max) {
   max = Math.floor(max);
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
+
+export function changeIt (unList, unPick, considerLater, newPair) {
+    unPick = this.state.unPick;
+    console.log("old pick", unPick);
+    newPair = [];
+  
+    let i = 0;
+    for ( i=0; i<2; i++) {
+      getNewPickInMatch(unList, unPick, considerLater, newPair);
+    }
+    this.setState({unPick: newPair});
+    saveStuff('newPair', newPair);
+    saveStuff('unPick', newPair);
+    getStuff('focusAreasJSON').then(focusAreas => this.setState({focusAreas: focusAreas}));
+  }
   
 
