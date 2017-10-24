@@ -1,7 +1,7 @@
 import React from 'react';
 import HighlightOff from 'material-ui-icons/HighlightOff';
 import { saveStuff } from './stuff';
-import scoreMore from './unScores'; //this is for MatchUpContainer testing
+import scoreMore from './zeroScores'; //this is for MatchUpContainer testing
 
 class GoalCard extends React.Component {
   

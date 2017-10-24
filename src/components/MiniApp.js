@@ -1,30 +1,23 @@
 import React from 'react';
 import MatchUpContainer from './MatchUpContainer';
 
-class MiniApp extends React.Component {
-  // constructor(props){
-  //   super(props);
-    
-  //   this.state = {
-  //     unPick: JSON.parse(localStorage.getItem('unPick')),
-  //   };
-  // }
+const MiniApp = (props) =>  (
+  <div>
+    <MatchUpContainer/>
+  </div>
+);
+
+export default MiniApp;
+
+// class MiniApp extends React.Component {
 
 //   render(){
-    
-//     const { unPick } = this.state;
-    
 //     return (
-//       <MatchUpContainer unPickProp={unPick}/>
+//       <div>
+//         <MatchUpContainer/>
+//       </div>
 //     );
 //   }
 // }
 
-  render(){
-    return (
-      <MatchUpContainer/>
-    );
-  }
-}
-
-export default MiniApp;
+// export default MiniApp;

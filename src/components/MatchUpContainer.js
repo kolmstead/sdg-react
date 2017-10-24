@@ -3,7 +3,9 @@ import focusAreas from './unObject';
 import MatchUp from './MatchUp';
 import { getStuff, saveStuff, getNewPickInMatch } from './stuff';
 import imgBlob from './imageExports';
-// import Button from './Button';
+import Button from './Button';
+import zeroScores from './zeroScores';
+import SortedGoal from './SortedGoal';
 
 class MatchUpContainer extends React.Component {
   
@@ -12,6 +14,9 @@ class MatchUpContainer extends React.Component {
     this.tryMe = this.tryMe.bind(this);
     this.changeMatch = this.changeMatch.bind(this);
     this.scoreWinner = this.scoreWinner.bind(this);
+    this.sortScores = this.sortScores.bind(this);
+    this.resetScores = this.resetScores.bind(this);
+    this.saveScoresToState = this.saveScoresToState.bind(this);
     
     this.state = {
       considerLater: JSON.parse(localStorage.getItem('considerLater')),
@@ -21,11 +26,18 @@ class MatchUpContainer extends React.Component {
       scores: JSON.parse(localStorage.getItem('unScores')),
       unPick: JSON.parse(localStorage.getItem('unPick')),
       fred: "hey fred!",
+      stateA: "huh",
+      stateB: "",
+      stateC: "",
+      zeroScoresForReset: zeroScores,
+      sortedScores: JSON.parse(localStorage.getItem('sortedScores')),
     };
   }
   
   bobPick(e, unList, unPick, considerLater, newPair, scores){
     this.scoreWinner(e, unList, unPick, considerLater, newPair, scores);
+    this.sortScores(scores);
+    this.saveSortedScoresToState();
     this.changeMatch(unList, unPick, considerLater, newPair);
   }
   
@@ -33,8 +45,7 @@ class MatchUpContainer extends React.Component {
     const winner = e.target.alt;
     const loser = winner !== unPick[0] ? unPick[0] : unPick[1];
     const loserScore = scores[loser];
-    const winnerScore = loserScore === 0 ? scores[winner] + 1 : scores[winner] + loserScore;
-    console.log("Winner score now", winnerScore);
+    const winnerScore = loserScore > scores[winner] ? loserScore + 1 : scores[winner] + 1;
     const newScores = scores;
     newScores[winner] = winnerScore;
     this.setState({scores: newScores});
@@ -61,6 +72,42 @@ class MatchUpContainer extends React.Component {
    console.log("tryMe", this.state.scores);
    return;
  } 
+ 
+ resetScores(){
+  saveStuff('unScores', this.state.zeroScoresForReset );
+  console.log("reset scores");  
+ }
+ 
+ saveScoresToState(){
+   getStuff('unScores').then((unScores)=>this.setState({ scores: unScores }));
+   console.log("saved scores to state");   
+ }
+ 
+ resetAndSaveScores(){
+   this.resetScores();
+   this.saveScoresToState();
+   console.log("reset and saved scores to state");
+ }
+ 
+ 
+  sortScores (scores) {
+    const scoresToSort = JSON.parse(localStorage.getItem('unScores'));
+    console.log("scores?", scoresToSort);
+      let mySortedScores = Object.entries(scoresToSort)
+        .sort((x,y) => y[1] - x[1]);
+      console.log("sorted?", mySortedScores);
+      saveStuff('sortedScores', mySortedScores);
+      return mySortedScores;
+  }
+  
+  saveSortedScoresToState(){
+    getStuff('sortedScores').then((sortedScores)=>this.setState({ sortedScores : sortedScores }));
+  }
+  
+  testFunction(){
+    console.log("Eh", this.state.stateA);
+  }
+
 
 
   render() {
@@ -69,26 +116,39 @@ class MatchUpContainer extends React.Component {
     return (
       <div>
         <MatchUp unPick1={unPick[0]} unPick2={unPick[1]} score1={scores[unPick[0]]} score2={scores[unPick[1]]} handleChange={(e)=>this.bobPick(e, unList, unPick, considerLater, newPair, scores)} img1={imgBlob[unPick[0]]} img2={imgBlob[unPick[1]]} {...this.state}
-        
+          greeting="hello"
         />
+        <Button handleClick={()=>this.resetAndSaveScores()} label="Reset Scores"/>
+        <Button handleClick={(scores)=>this.sortScores()} label="Sort Scores" />
+        <SortedGoal {...this.state} greeting="Hello again, hello" />        
+
+
       </div>
     );
   }
 }
 
 export default MatchUpContainer;
-//(e)=>this.bobPick(e, unList, unPick, considerLater, newPair, scores)
+
+//this was working but not refreshing 
+// <SortedGoal {...this.state} barf={this.state.sortedScores} />
+
+//test of static sortedScore to image
+// <SortedGoal src={imgBlob[sortedScores[0][0]]} alt={imgBlob[sortedScores[0][0]]} />
 
 
-//old code when getting 
-        // <MatchUp unPick1={unPickProp[0]} unPick2={unPickProp[1]} score1={scores[unPickProp[0]]} score2={scores[unPickProp[1]]} handleChange={()=>this.changeMatch(unList, unPick, considerLater)} thePick={this.props.unPickProp} img1={imgBlob[unPickProp[0]]} img2={imgBlob[unPickProp[1]]} {...this.state}
-        
-        // />
-
-
-
-
-
+        // <div>
+        //   {
+        //     sortedScores.map(function(x, index){
+        //       return (
+        //         <SortedGoal key={ index } className="sortedGoal"
+        //           src={imgBlob[sortedScores[x][0]]}
+        //           alt={sortedScores[x][0]} {...this.state}
+        //         />
+        //       );
+        //     })
+        //   }
+        // </div>
 
 // <MatchUp>
 
