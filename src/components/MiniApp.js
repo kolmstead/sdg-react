@@ -8,16 +8,3 @@ const MiniApp = (props) =>  (
 );
 
 export default MiniApp;
-
-// class MiniApp extends React.Component {
-
-//   render(){
-//     return (
-//       <div>
-//         <MatchUpContainer/>
-//       </div>
-//     );
-//   }
-// }
-
-// export default MiniApp;

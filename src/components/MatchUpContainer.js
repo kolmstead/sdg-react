@@ -6,17 +6,18 @@ import imgBlob from './imageExports';
 import Button from './Button';
 import zeroScores from './zeroScores';
 import SortedGoal from './SortedGoal';
+import SimpleShow from './SimpleShow';
 
 class MatchUpContainer extends React.Component {
   
   constructor (props) {
     super();
-    this.tryMe = this.tryMe.bind(this);
     this.changeMatch = this.changeMatch.bind(this);
     this.scoreWinner = this.scoreWinner.bind(this);
     this.sortScores = this.sortScores.bind(this);
     this.resetScores = this.resetScores.bind(this);
     this.saveScoresToState = this.saveScoresToState.bind(this);
+    this.pickForLater = this.pickForLater.bind(this);
     
     this.state = {
       considerLater: JSON.parse(localStorage.getItem('considerLater')),
@@ -25,19 +26,14 @@ class MatchUpContainer extends React.Component {
       scoredFA: JSON.parse(localStorage.getItem('focusAreasJSON')),
       scores: JSON.parse(localStorage.getItem('unScores')),
       unPick: JSON.parse(localStorage.getItem('unPick')),
-      fred: "hey fred!",
-      stateA: "huh",
-      stateB: "",
-      stateC: "",
       zeroScoresForReset: zeroScores,
       sortedScores: JSON.parse(localStorage.getItem('sortedScores')),
+      isHidden: true,
     };
   }
   
-  bobPick(e, unList, unPick, considerLater, newPair, scores){
+  pickWinner(e, unList, unPick, considerLater, newPair, scores){
     this.scoreWinner(e, unList, unPick, considerLater, newPair, scores);
-    this.sortScores(scores);
-    this.saveSortedScoresToState();
     this.changeMatch(unList, unPick, considerLater, newPair);
   }
   
@@ -48,66 +44,63 @@ class MatchUpContainer extends React.Component {
     const winnerScore = loserScore > scores[winner] ? loserScore + 1 : scores[winner] + 1;
     const newScores = scores;
     newScores[winner] = winnerScore;
-    this.setState({scores: newScores});
-    console.log("going up?", newScores);
     saveStuff('unScores', newScores);
+    this.saveScoresToState();
+    this.sortAndSave();
   }
   
   changeMatch(unList, unPick, considerLater, newPair) {
     unPick = this.state.unPick;
-    console.log("old pick", unPick);
     newPair = [];
   
     let i = 0;
     for ( i=0; i<2; i++) {
       getNewPickInMatch(unList, unPick, considerLater, newPair);
-    } console.log("newPair is now", newPair);
+    } 
     this.setState({unPick: newPair});
     saveStuff('newPair', newPair);
     saveStuff('unPick', newPair);
     getStuff('focusAreasJSON').then(focusAreas => this.setState({focusAreas: focusAreas}));
   }
-  
- tryMe(unList, unPick, considerLater, newPair){
-   console.log("tryMe", this.state.scores);
-   return;
- } 
  
  resetScores(){
   saveStuff('unScores', this.state.zeroScoresForReset );
-  console.log("reset scores");  
  }
  
  saveScoresToState(){
    getStuff('unScores').then((unScores)=>this.setState({ scores: unScores }));
-   console.log("saved scores to state");   
  }
  
  resetAndSaveScores(){
    this.resetScores();
    this.saveScoresToState();
-   console.log("reset and saved scores to state");
  }
  
- 
   sortScores (scores) {
-    const scoresToSort = JSON.parse(localStorage.getItem('unScores'));
-    console.log("scores?", scoresToSort);
+    const scoresToSort = scores;
       let mySortedScores = Object.entries(scoresToSort)
         .sort((x,y) => y[1] - x[1]);
-      console.log("sorted?", mySortedScores);
       saveStuff('sortedScores', mySortedScores);
       return mySortedScores;
   }
   
-  saveSortedScoresToState(){
-    getStuff('sortedScores').then((sortedScores)=>this.setState({ sortedScores : sortedScores }));
+  sortAndSave(){
+    getStuff('unScores')
+     .then((scores)=>this.sortScores(scores))
+     .then((mySortedScores)=>this.setState({sortedScores:mySortedScores}));
   }
   
-  testFunction(){
-    console.log("Eh", this.state.stateA);
+  pickForLater(e){
+    const pick = e.target.id;
+    console.log(pick);
   }
-
+  
+  showPickInfo(e) {
+    const pick = e.target.id;
+    const info = this.state.scoredFA;
+    console.log("info?", info[pick].info);
+    this.setState({ isHidden:!this.state.isHidden });
+  }
 
 
   render() {
@@ -115,12 +108,15 @@ class MatchUpContainer extends React.Component {
   
     return (
       <div>
-        <MatchUp unPick1={unPick[0]} unPick2={unPick[1]} score1={scores[unPick[0]]} score2={scores[unPick[1]]} handleChange={(e)=>this.bobPick(e, unList, unPick, considerLater, newPair, scores)} img1={imgBlob[unPick[0]]} img2={imgBlob[unPick[1]]} {...this.state}
+        <MatchUp unPick1={unPick[0]} unPick2={unPick[1]} score1={scores[unPick[0]]} score2={scores[unPick[1]]} handleChange={(e)=>this.pickWinner(e, unList, unPick, considerLater, newPair, scores)} img1={imgBlob[unPick[0]]} img2={imgBlob[unPick[1]]} {...this.state}
           greeting="hello"
+          pickForLater={(e)=>this.pickForLater(e)}
+          showPickInfo={(e)=>this.showPickInfo(e)}
         />
         <Button handleClick={()=>this.resetAndSaveScores()} label="Reset Scores"/>
         <Button handleClick={(scores)=>this.sortScores()} label="Sort Scores" />
-        <SortedGoal {...this.state} greeting="Hello again, hello" />        
+        <SortedGoal {...this.state} />  
+        {!this.state.isHidden && <SimpleShow  stuff={this.state.scoredFA[unPick[0]].label}/>}
 
 
       </div>

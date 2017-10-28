@@ -6,7 +6,6 @@ import { getNewPick, getNewPick2 } from './components/pairSupport';
 import GoalCard from './components/GoalCard';
 import imgBlob from './components/imageExports';
 import focusAreas from './components/unObject';
-import MatchUpContainer from './components/MatchUpContainer';
 
 class App extends React.Component {
   
@@ -171,7 +170,6 @@ const img2 = focusAreas[unPick[1]];
         <Button handleClick={()=>console.log(this.state.unPick)} label="Get UnPick State Now"/>
         <Button handleClick={()=>console.log("clList in state is", considerLater)} label="Get considerLater from state"/>
         <Button handleClick={()=>console.log("scores anyone?", this.state.focusAreas[unPick[0]].slug, this.state.focusAreas[unPick[0]].score)} label="Get Scores" />
-        <MatchUpContainer unPickProp={unPick} />
 
       </div>)
     );
