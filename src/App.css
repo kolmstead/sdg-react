@@ -1,17 +1,47 @@
+/*
+Root.js and id="isThisIt" is the base I think
+adjust Header, Mini-App, and other menu links as child ids of
+"isThisIt"
+
+
+*/
+
+#listOfGoals {
+  grid-column-start: 2;
+  grid-row-start: 2;
+  padding-left: 50px;
+}
+
 .App {
   text-align: center;
-  grid-template-columns: 50px 1fr 50px;
+  grid-template-columns: 1fr 1fr 1fr;
   grid-gap: 10px;
 }
 
 .header {
   padding: 30px 30px 10px 30px;
-  grid-columns: 2/3;
+  grid-column-start: 2;
 }
 
 .home {
   padding: 0px 30px 10px 30px;
   grid-columns: 2/3;
+}
+
+#root {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+#isThisIt {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 150px repeat(4,1fr);
+}
+
+#headerInThisIsIt {
+  grid-column-start: 2;
+  grid-row-start: 1;
 }
 
 #twopics {
@@ -57,8 +87,8 @@
 }
 
 .bobCard {
-  margin: 10px 0px 0px 100px;
-  padding: 50px;
+  margin: 10px 0px 0px 10px;
+  padding: 10px;
   width: 300px;
   border-color: #1c4402;
   border-style: solid;
@@ -69,4 +99,103 @@
 
 .menu-links {
   padding: 20px;
+}
+
+.mini-app {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 10px 1fr 1fr 1fr 1fr;
+  grid-column-start: 2;
+  grid-row-start: 2;
+}
+
+/* moves inside .mini-app */
+.matchup-container {
+  grid-column-start: 2;
+  display: grid;
+  grid-template-columns: 1fr repeat(20, 20px) 1fr;
+  grid-template-rows: repeat(30, 20px);
+}
+
+.matchup {
+  grid-column-start: 3;
+  display: grid;
+  grid-template-columns: 20px repeat(13, 20px) 20px;
+  grid-template-rows: repeat(15, 20px);
+}
+
+.imgPair1 {
+  grid-column-start: 3;
+  grid-rows: 2;
+  box-shadow: 8px 6px 6px rgba(0,0,0,0.4);
+}
+
+.imgPair2 {
+  grid-column-start: 10;
+  grid-rows: 2;
+  box-shadow: 8px 6px 6px rgba(0,0,0,0.4);
+}
+
+#later1 {
+  grid-column-start: 3;
+  grid-row-start: 6;
+  padding-left: 6px;
+  color: white;
+  font-size: 12px;
+}
+
+#later2 {
+  grid-column-start: 10;
+  grid-row-start: 6;
+  padding-left: 6px;
+  color: white;
+  font-size: 12px;
+}
+
+#later1:hover, #later2:hover {
+  cursor: pointer;
+}
+
+#info-1 {
+  grid-column-start: 8;
+  grid-row-start: 6;
+  padding-left: 12px;
+  color: white;
+  font-size: 12px;
+}
+
+#info-2 {
+  grid-column-start: 15;
+  grid-row-start: 6;
+  padding-left: 12px;
+  color: white;
+  font-size: 12px;
+}
+
+#sorted {
+  grid-column-start: 3;
+  grid-column-end: 21;
+  grid-row-start: 9; 
+}
+
+#laterList {
+  grid-column-start: 3;
+  grid-column-end: 21;
+  grid-row-start: 12;
+}
+
+#button1 {
+  grid-column-start: 4;
+  grid-column-end: 6;
+  grid-row-start: 23;
+  grid-row-end: 24;
+  align-self: center;
+}
+
+#button2 {
+  grid-column-start: 12;
+  grid-column-end: 13;
+  grid-row-start: 23;
+  grid-row-end: 24;
+  align-self: center;
 }

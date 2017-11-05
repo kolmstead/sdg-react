@@ -62,6 +62,7 @@ replaceConsiderLater2(x) {
   console.log("starting pickCL, cl is", considerLater);
   // let considerLater = getStuff('considerLater');
   let indexOfClickedUnPick = this.state.unPick.indexOf(x);
+  console.log("x is", x);
   console.log("index is", indexOfClickedUnPick);
   let unPickObj = new Set(this.state.unPick); //convert array to Object
   unPickObj.delete(x);

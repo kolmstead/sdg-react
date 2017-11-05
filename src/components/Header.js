@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 const Header = (props)=>{
   return (
-    <div className="header">
+    <div className="header" id="headerInThisIsIt">
       <img src={unBanner} alt="sdg 7" id="sdg-banner"/><br/>
       <span >
         <Link to="/" className="menu-links">Home</Link>

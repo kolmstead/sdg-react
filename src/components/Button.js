@@ -13,7 +13,7 @@ class Button extends React.Component {
      <button
        className="btn btn-default"
        style={buttonStyle}
-       onClick={this.props.handleClick}>
+       onClick={this.props.handleClick} id={this.props.id}>
         {this.props.label}
       </button>
    ); 

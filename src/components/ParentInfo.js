@@ -22,7 +22,7 @@ class ParentInfo extends React.Component {
     const { un2, focusAreas } = this.state;
 
       return (
-        <div>
+        <div id="listOfGoals">
 
             {un2.map(function(name, index){
                 return (

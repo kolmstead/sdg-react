@@ -18,8 +18,8 @@ const Home = (props)=>{
 
 const Root = () => (
   <Router>
-    <div>
-      <Header/>
+    <div id="isThisIt">
+      <Header />
       <Route exact path='/' component={Home}/>
       <Route path='/App' component={App} />
       <Route path='/Goals' component={ParentInfo}/>

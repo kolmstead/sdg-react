@@ -2,7 +2,7 @@ import React from 'react';
 import MatchUpContainer from './MatchUpContainer';
 
 const MiniApp = (props) =>  (
-  <div>
+  <div className="mini-app">
     <MatchUpContainer/>
   </div>
 );
