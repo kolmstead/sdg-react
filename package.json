@@ -3,11 +3,17 @@
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
+    "nodemon": "^1.12.1",
     "react-scripts": "1.0.13"
   },
   "dependencies": {
+    "axios": "^0.17.0",
+    "body-parser": "^1.18.2",
+    "cors": "^2.8.4",
     "material-ui": "^1.0.0-beta.8",
     "material-ui-icons": "^1.0.0-beta.5",
+    "mongo": "^0.1.0",
+    "mongodb": "^2.2.33",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "react-redux": "^5.0.6",
@@ -18,6 +24,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "dev": "nodemon server.js"
   }
 }

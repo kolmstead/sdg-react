@@ -14,7 +14,7 @@ class App extends React.Component {
     this.replaceConsiderLater2 = this.replaceConsiderLater2.bind(this);
     this.changeUnPick3 = this.changeUnPick3.bind(this);
     this.getStuffFromLocalStorageToState = this.getStuffFromLocalStorageToState.bind(this);
-    this.checkSetUp = this.checkSetUp.bind(this);
+    // this.checkSetUp = this.checkSetUp.bind(this);
     // this.scoreUnPick = this.scoreUnPick.bind(this);
       
     this.state = {
@@ -107,19 +107,19 @@ getStuffFromLocalStorageToState () {
 //   this.setState({considerLater: bobby});
 }
 
-checkSetUp() {
-  const { localSetUp } = this.state;
-  localSetUp.map(function(x){
-    let check = localStorage.getItem(x);
-    if (!check) {
-      console.log(x, "doesn't exist");
-      saveStuff(x, []);
-    } else {return x;}
-    console.log("done checking");
-    return x;
-  });
+// checkSetUp() {
+//   const { localSetUp } = this.state;
+//   localSetUp.map(function(x){
+//     let check = localStorage.getItem(x);
+//     if (!check) {
+//       console.log(x, "doesn't exist");
+//       saveStuff(x, []);
+//     } else {return x;}
+//     console.log("done checking");
+//     return x;
+//   });
   
-}
+// }
 
 componentWillMount() {
   let checkFocusAreas = localStorage.getItem('focusAreasJSON');
@@ -129,7 +129,7 @@ componentWillMount() {
     } else { 
       getStuff('focusAreasJSON').then(focusAreas => this.setState({ focusAreas }));
     }
-  this.checkSetUp();
+  // this.checkSetUp();
   this.getStuffFromLocalStorageToState();
   this.changeUnPick3(this.state.unList, this.state.unPick, this.state.considerLater);  
 }

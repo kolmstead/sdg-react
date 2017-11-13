@@ -3,6 +3,7 @@ import GoalInfoCard from './GoalInfoCard';
 import focusAreas from './unObject';
 import imgBlob from './imageExports';
 import { getStuff } from './stuff';
+import Form from './Form';
 
 class ParentInfo extends React.Component {
   constructor(props){
@@ -23,6 +24,7 @@ class ParentInfo extends React.Component {
 
       return (
         <div id="listOfGoals">
+        <Form />
 
             {un2.map(function(name, index){
                 return (
@@ -33,6 +35,7 @@ class ParentInfo extends React.Component {
                   </GoalInfoCard>
             )})
             }
+       
         </div>
       );
     }
