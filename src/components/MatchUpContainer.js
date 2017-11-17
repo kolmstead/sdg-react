@@ -80,8 +80,8 @@ class MatchUpContainer extends React.Component {
  }
  
  resetAndSaveScores(){
-   this.resetScores();
-   this.saveScoresToState();
+  this.resetScores();
+  this.saveScoresToState();
  }
  
   sortScores (scores) {
@@ -110,9 +110,6 @@ class MatchUpContainer extends React.Component {
     considerLaterList.push(laterPick);
     saveStuff('considerLater', considerLaterList);
     this.setState({ considerLater: considerLaterList });
-    // let unPickObj = new Set(this.state.unPick); // convert array to object
-    // unPickObj.delete(laterPick)
-    console.log("picked for later is", laterPick);
     this.replacePickedForLater(pick);
     }
   }
@@ -168,44 +165,3 @@ class MatchUpContainer extends React.Component {
 }
 
 export default MatchUpContainer;
-
-//this was working but not refreshing 
-// <SortedGoal {...this.state} barf={this.state.sortedScores} />
-
-//test of static sortedScore to image
-// <SortedGoal src={imgBlob[sortedScores[0][0]]} alt={imgBlob[sortedScores[0][0]]} />
-
-
-        // <div>
-        //   {
-        //     sortedScores.map(function(x, index){
-        //       return (
-        //         <SortedGoal key={ index } className="sortedGoal"
-        //           src={imgBlob[sortedScores[x][0]]}
-        //           alt={sortedScores[x][0]} {...this.state}
-        //         />
-        //       );
-        //     })
-        //   }
-        // </div>
-
-// <MatchUp>
-
-//   <GoalCard
-//     image={goal1.image}
-//     title={goal1.title}
-//     description={goal1.description}
-//     onSelect={() => chooseWinner(goal1, goal2)}
-//     onRemove={() => newMatchUp(goal1) }
-//   />
-
-//   <GoalCard
-//     image={goal2.image}
-//     title={goal2.title}
-//     description={goal2.description}
-//     onSelect={() => chooseWinner(goal2, goal1)}
-//     onRemove={() => newMatchUp(goal2) }
-//   />
-
-// </MatchUp>
-
