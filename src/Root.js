@@ -8,6 +8,7 @@ import { saveStuff, getStuff } from './components/stuff';
 import QuoteForm from './components/QuoteForm';
 import zeroScores from './components/zeroScores';
 import initialState from './components/initialState';
+import QuoteList from './components/QuoteList';
 
 
 const Home = (props)=>{
@@ -17,6 +18,7 @@ const Home = (props)=>{
       <p>And a lot of stuff you should do.</p>
       <p>Get to know stuff and start doing stuff.</p>
       <QuoteForm/>
+      <QuoteList url="http://r77-kolmstead.c9users.io:8081/api/quoteList" />
     </div>
   );
 };

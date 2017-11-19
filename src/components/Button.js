@@ -1,9 +1,9 @@
 import React from 'react';
 
 const buttonStyle = {
-  backgroundColor: '#7693c1',
+  backgroundColor: '#3498db',
   width: '150px',
-  padding: '15px'
+  height: '40px'
 };
 
 class Button extends React.Component {
