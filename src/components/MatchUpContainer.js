@@ -31,6 +31,11 @@ class MatchUpContainer extends React.Component {
       zeroScoresForReset: zeroScores,
       sortedScores: JSON.parse(localStorage.getItem('sortedScores')),
       isHidden: true,
+      showInfo: {
+          infoTitle: '',
+          infoHeader: '',
+          infoText: ''
+        },
     };
   }
   
@@ -135,14 +140,20 @@ class MatchUpContainer extends React.Component {
   
   showPickInfo(e) {
     const pick = e.target.id;
-    const info = this.state.scoredFA;
-    console.log("info?", info[pick].info);
-    this.setState({ isHidden:!this.state.isHidden });
+    const infoPop = this.state.scoredFA;
+    const info = pick==="info-1" ? this.state.unPick[0] : this.state.unPick[1];
+    this.setState({ showInfo: {
+        infoTitle: infoPop[info].label,
+        infoHeader: infoPop[info].slug,
+        infoText: infoPop[info].info
+      }
+    });
+    this.setState({ isHidden:!this.state.isHidden }); //this.setState({ isHidden:!this.state.isHidden })
   }
 
 
   render() {
-  const { unList, unPick, considerLater, newPair, scores } = this.state;
+  const { unList, unPick, considerLater, newPair, scores, showInfo } = this.state;
   
     return (
       <div className="matchup-container">
@@ -156,7 +167,7 @@ class MatchUpContainer extends React.Component {
         <Button handleClick={()=>this.resetAndSaveScores()} label="Reset Scores" id="button1"/>
         <Button handleClick={()=>this.resetConsiderLater()} label="Reset ConsiderLater" id="button2"/>
         <ConsiderLater {...this.state} />
-        {!this.state.isHidden && <SimpleShow  stuff={this.state.scoredclFA[unPick[0]].label}/>}
+        {!this.state.isHidden && <SimpleShow  stuff={showInfo}/>}
 
 
       </div>

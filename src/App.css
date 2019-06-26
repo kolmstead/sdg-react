@@ -153,7 +153,7 @@ adjust Header, Mini-App, and other menu links as child ids of
   font-size: 12px;
 }
 
-#later1:hover, #later2:hover {
+#later1:hover, #later2:hover, #info-1:hover, #info-2:hover {
   cursor: pointer;
 }
 
@@ -199,4 +199,19 @@ adjust Header, Mini-App, and other menu links as child ids of
   grid-row-start: 23;
   grid-row-end: 24;
   align-self: center;
+}
+
+#simpleShow {
+  height: 200px;
+  width: 300px;
+  background-color: white;
+  font-size: .7em;
+  font: green;
+  padding: 4px;
+  border: 2px solid red;
+  border-radius: 6px;
+  box-shadow: 8px 6px 6px rgba(0,0,0,0.4);
+  position: absolute;
+  bottom: 150px;
+  left: 130px;
 }
